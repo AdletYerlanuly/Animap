@@ -1,3 +1,4 @@
+import django_heroku
 """
 Django settings for Animao project.
 
@@ -127,3 +128,13 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 LOGIN_REDIRECT_URL = '/'
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+django_heroku.settings(locals())
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+
+Написать #основной

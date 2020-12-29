@@ -1,1 +1,1 @@
-web: gunicorn Animap.wsgi ==log--file =
+web: gunicorn Animap.wsgi
